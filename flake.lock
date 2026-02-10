@@ -16,9 +16,30 @@
         "type": "github"
       }
     },
+    "pyNetworking": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770742228,
+        "narHash": "sha256-lNTUzgcf3OmVfJ+nQwm5PalsF8EQ+51JG0hFp3J6QrI=",
+        "owner": "Theelf111",
+        "repo": "remoteOverlayClient",
+        "rev": "7494cc8d6bb2abfd499535ecfd0c4b42167cb561",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Theelf111",
+        "repo": "remoteOverlayClient",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pyNetworking": "pyNetworking"
       }
     }
   },

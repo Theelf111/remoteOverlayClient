@@ -1,5 +1,6 @@
 {
   python313,
+  pyNetworking,
 }: let
   python = python313;
   pythonPkgs = python.pkgs;
@@ -16,6 +17,7 @@ in
     ];
 
     dependencies = [
+      pyNetworking
     ];
 
     pyproject = true;
