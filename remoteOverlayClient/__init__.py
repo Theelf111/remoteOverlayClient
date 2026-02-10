@@ -1,4 +1,4 @@
-import backend
+from . import backend
 import time
 
 #server = nw.connect(input("ip: "), 25565, "PASSWORD")
