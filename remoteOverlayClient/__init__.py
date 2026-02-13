@@ -17,7 +17,7 @@ def pushFile(path):
     backend.sendFile(server, path)
     server.send()
 
-def reloadshader(filename):
+def reloadShader(filename):
     backend.sendReloadShader(server, filename)
     server.send()
 
