@@ -1,8 +1,8 @@
 import pyNetworking as nw
 
 @nw.recvFunction(str)
-def recvDebug(s):
-    print(s)
+def recvDebug(connection, message):
+    print(message)
 
 @nw.sendFunction(str, bytes)
 def sendFile(path):
