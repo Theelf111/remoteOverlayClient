@@ -1,7 +1,7 @@
 import pyNetworking as nw
 
 @nw.recvFunction(str)
-def debug(s):
+def recvDebug(s):
     print(s)
 
 @nw.sendFunction(str, bytes)
