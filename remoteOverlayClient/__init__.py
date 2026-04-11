@@ -3,6 +3,10 @@ import time
 
 #server = nw.connect(input("ip: "), 25565, "PASSWORD")
 
+def send():
+    server.send()
+    server.recieve()
+
 server = None
 def listen():
     global server
@@ -15,11 +19,11 @@ def listen():
 
 def pushFile(path):
     backend.sendFile(server, path)
-    server.send()
+    send()
 
 def reloadShader(filename):
     backend.sendReloadShader(server, filename)
-    server.send()
+    send()
 
 class Mesh(backend.ClientMesh):
     def update(self):
@@ -35,7 +39,7 @@ class Mesh(backend.ClientMesh):
                 Mesh.__getattribute__(self, "sendUniform" + str(count) + ("f" if valueType == float else "i"))(server, name, *value)
             else:
                 print(f"Uniform \"{name}\" with value {value} has invalid type ({count}, {valueType})")
-        server.send()
+        send()
 
     def setText(self, pos, text, color0 = (0.0, 0, 0, 1), color1 = (1.0, 1, 1, 1)):
         self.data = ()
@@ -54,52 +58,52 @@ class Mesh(backend.ClientMesh):
     def selectShader(self, shader):
         self.shader = shader
         self.sendSelectShader(server, shader)
-        server.send()
+        send()
 
     def uniformTexture(self, name, texture):
         self.textures[name] = texture
         self.sendUniformTexture(server, name, texture)
-        server.send()
+        send()
 
     def uniform1f(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform2f(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform3f(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform4f(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform1i(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform2i(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform3i(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
     def uniform4i(self, name, *xs):
         self.uniforms[name] = xs
         self.sendUniform1i(server, name, *xs)
-        server.send()
+        send()
 
 def textMesh(pos, text, color0 = (0.0, 0, 0, 1), color1 = (1.0, 1, 1, 1)):
     mesh = Mesh("builtins:text", None,
