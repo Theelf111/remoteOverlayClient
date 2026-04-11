@@ -1,5 +1,9 @@
 import pyNetworking as nw
 
+@nw.recvFunction(str)
+def debug(s):
+    print(s)
+
 @nw.sendFunction(str, bytes)
 def sendFile(path):
     fileName = path.split("/")[-1]
