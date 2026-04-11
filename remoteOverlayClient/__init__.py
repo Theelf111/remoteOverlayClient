@@ -5,7 +5,7 @@ import time
 
 def send():
     server.send()
-    server.recieve()
+    server.receive()
 
 server = None
 def listen():
