@@ -1,7 +1,7 @@
 import pyNetworking as nw
 
 @nw.recvFunction(str)
-def recvDebug(connection, message):
+def recvDebug(message):
     print(message)
 
 @nw.sendFunction(str, bytes)
@@ -17,7 +17,7 @@ class Texture:
     def write(filename):
         return (filename,)
 
-@nw.sendFunction(Texture)
+@nw.sendFunction(nw.Connection, Texture)
 def sendReloadTexture(filename):
     return (filename,)
 
@@ -26,7 +26,7 @@ class Shader:
     def write(filename):
         return (filename,)
 
-@nw.sendFunction(Shader)
+@nw.sendFunction(nw.Connection, Shader)
 def sendReloadShader(filename):
     return (filename,)
 
@@ -43,47 +43,47 @@ class ClientMesh:
         self.onServer = True
         return self.shader, self.data, list(self.textures.items())
 
-@nw.sendFunction(Shader, [float], [(str, Texture)], methodOf = ClientMesh)
-def sendUpdate(self):
-    return self, self.shader, self.data, list(self.textures)
+    @nw.sendFunction(nw.Self, Shader, [float], [(str, Texture)])
+    def sendUpdate(self):
+        return self, self.shader, self.data, list(self.textures)
 
-@nw.sendFunction(Shader, methodOf = ClientMesh)
-def sendSelectShader(self, shader):
-    return self, shader
+    @nw.sendFunction(nw.Self, Shader)
+    def sendSelectShader(self, shader):
+        return self, shader
 
-@nw.sendFunction(str, Texture, methodOf = ClientMesh)
-def sendUniformTexture(self, name, texture):
-    return self, name, texture
+    @nw.sendFunction(nw.Self, str, Texture)
+    def sendUniformTexture(self, name, texture):
+        return self, name, texture
 
-@nw.sendFunction(str, float, methodOf = ClientMesh)
-def sendUniform1f(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, float)
+    def sendUniform1f(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, float, float, methodOf = ClientMesh)
-def sendUniform2f(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, float, float)
+    def sendUniform2f(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, float, float, float, methodOf = ClientMesh)
-def sendUniform3f(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, float, float, float)
+    def sendUniform3f(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, float, float, float, float, methodOf = ClientMesh)
-def sendUniform4f(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, float, float, float, float)
+    def sendUniform4f(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, int, methodOf = ClientMesh)
-def sendUniform1i(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, int)
+    def sendUniform1i(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, int, int, methodOf = ClientMesh)
-def sendUniform2i(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, int, int)
+    def sendUniform2i(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, int, int, int, methodOf = ClientMesh)
-def sendUniform3i(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, int, int, int)
+    def sendUniform3i(self, name, *xs):
+        return self, name, *xs
 
-@nw.sendFunction(str, int, int, int, int, methodOf = ClientMesh)
-def sendUniform4i(self, name, *xs):
-    return self, name, *xs
+    @nw.sendFunction(nw.Self, str, int, int, int, int)
+    def sendUniform4i(self, name, *xs):
+        return self, name, *xs
 
